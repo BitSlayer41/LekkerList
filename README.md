@@ -94,7 +94,7 @@ LekkerList/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/LekkerList.git
+git clone https://github.com/BitSlayer41/LekkerList.git
 cd LekkerList
 ```
 
