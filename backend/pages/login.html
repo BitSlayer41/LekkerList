@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lekkerlist - Login</title>
+
+    <!--Bootstrap CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!--FavIcon-->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/images/companyLogo.jpeg"
+    />
+
+    <!--StyleSheet-->
+    <link rel="stylesheet" href="../assets/css/Login.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="headerContainer">
+        <div class="logoWrap">
+          <img
+            src="../assets/images/companyLogo.jpeg"
+            alt="LekkerList Logo"
+            class="logo"
+          />
+        </div>
+      </div>
+      <div class="brand">
+        <div class="brandTitle">LekkerList</div>
+        <div class="brandSubtitle">Login into your account</div>
+      </div>
+
+      <!--Form-->
+      <form method="POST" class="form" id="authForm">
+        <!--Email-->
+        <div class="formGroup">
+          <label class="formLabel" for="emailField">Email</label>
+          <div class="inputWrap">
+            <span class="inputIcon">
+              <!--Envelope svg-->
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <image
+                  href="../assets/images/envelope.svg"
+                  width="16"
+                  height="16"
+                />
+              </svg>
+            </span>
+            <input
+              type="email"
+              id="emailField"
+              name="email"
+              class="formInput"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+        </div>
+
+        <!--Password-->
+        <div class="formGroup">
+          <label class="formLabel" for="passwordField">Password</label>
+          <div class="inputWrap">
+            <span class="inputIcon">
+              <!--Lock svg-->
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <image
+                  href="../assets/images/lock.svg"
+                  width="16"
+                  height="16"
+                />
+              </svg>
+            </span>
+            <input
+              type="password"
+              id="passwordField"
+              name="password"
+              class="formInput"
+              placeholder="Enter your password"
+              required
+            />
+
+            <!--Show/Hide password toggle-->
+            <button type="button" id="togglePassword" class="togglePassword">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <image href="../assets/images/eye.svg" width="16" height="16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!--Extras (Login Mode)-->
+        <div class="extrasRow" id="extrasRow">
+          <label class="checkLabel" id="rememberLabel">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
+              class="checkboxInput"
+            />
+            Remeber Me
+          </label>
+          <a href="./resetPassword.html" class="forgotLink" id="forgotLink"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <!--Submit Button-->
+        <button type="submit" class="submitBtn">Sign In</button>
+
+        <!--Footer-->
+        <div class="cardFooter">
+          <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
+          <span id="footerSwitch"
+            >Don't have and account?<a href="./register.html" id="switchLink"
+              >Register</a
+            ></span
+          >
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--JS-->
+    <script src="../assets/js/Login.js?v=2" defer></script>
+  </body>
+</html>
