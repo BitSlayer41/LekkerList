@@ -1,0 +1,38 @@
+.footer {
+  background: linear-gradient(120deg, #1a3330 0%, #0f2220 100%);
+  color: #a0bfbc;
+  padding: 24px 40px;
+  margin-top: 40px;
+  border-top: 2px solid #2ab0a0;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer h3 {
+  font-size: 17px;
+  font-weight: 800;
+  font-family: "Nunito", sans-serif;
+  background: linear-gradient(90deg, #f47c20 52%, #2bbfb3 52%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.footer p {
+  font-size: 13px;
+  color: #6b8f8c;
+  font-family: "Nunito", sans-serif;
+}
+
+.footerCopy {
+  font-size: 12px;
+  color: #4a7a77;
+  font-family: "Nunito" sans-serif;
+}

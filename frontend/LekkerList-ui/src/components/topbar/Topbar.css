@@ -1,0 +1,47 @@
+.topbar {
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 1.5px soild #e4eeec;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbarMenu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b8f8c;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.topbarMenu:hover {
+  background: #edf8f6;
+  color: #2ab0a0;
+}
+
+.topbarBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a3330;
+  font-family: "Nunito", sans-serif;
+}
+
+.svgIcon {
+  width: 20px;
+  height: 20px;
+  fill: black;
+}

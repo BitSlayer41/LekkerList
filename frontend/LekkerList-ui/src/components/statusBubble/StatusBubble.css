@@ -1,0 +1,64 @@
+.statusBubble {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.statusHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.statusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.statusText {
+  color: orangered;
+  font-size: 0.95rem;
+}
+
+.statusControls select {
+  background: #222;
+  border: 1px solid #444;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+}
+
+.status-pending {
+  color: #f59e0b;
+}
+
+.status-paid {
+  color: #10b981;
+}
+
+.status-processing {
+  color: #3b82f6;
+}
+
+.status-shipped {
+  color: #8b5cf6;
+}
+
+.status-delivered {
+  color: #22c55e;
+}
+
+.status-cancelled {
+  color: #ef4444;
+}
+
+.status-refunded {
+  color: #f97316;
+}

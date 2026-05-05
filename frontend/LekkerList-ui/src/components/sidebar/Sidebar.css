@@ -1,0 +1,225 @@
+/* ── Off-Canvas Panel ── */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: width 0.4s ease;
+  white-space: nowrap;
+}
+
+/* Links */
+.sidenav a {
+  padding: 10px 10px 10px 28px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.2s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Close button */
+.sidenav .closebtn {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  font-size: 36px;
+  padding: 0;
+  color: #aaa;
+}
+
+.sidenav .closebtn:hover {
+  color: #fff;
+}
+
+/* Brand / logo */
+.sidenavBrand {
+  padding: 0 20px 12px;
+}
+
+.sidenavLogo {
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Section title */
+.sidenavTitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  padding: 8px 28px 4px;
+  margin: 0;
+}
+
+/* Icons */
+.sidenavIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.sidenavLabel {
+  font-size: 15px;
+}
+
+/* User block */
+.sidenavUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-top: 1px solid #222;
+  margin-top: 12px;
+}
+
+.sidenavUserAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #333;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.sidenavUserInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenavUserName {
+  font-size: 14px;
+  color: #eee;
+  font-weight: 500;
+}
+
+.sidenavUserRole {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Logout */
+.sidenavLogout {
+  color: #e05555 !important;
+  border-top: 1px solid #222;
+  margin-top: 8px;
+}
+
+.sidenavLogout:hover {
+  color: #ff6b6b !important;
+}
+
+/* Overlay */
+.sidenavOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 999;
+  transition: opacity 0.3s;
+}
+
+/* Hamburger toggle button */
+.sidenavToggle {
+  position: fixed;
+  top: 14px;
+  left: 16px;
+  z-index: 998;
+  background: #111;
+  color: #eee;
+  border: none;
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.sidenavToggle:hover {
+  background: #222;
+}
+
+/* Responsive */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 14px;
+  }
+}
+
+/* Active nav link */
+.sidenav a.sidenavLinkActive {
+  color: #2bbfb3;
+  background: rgba(43, 191, 179, 0.08);
+}
+
+/* Remove the standalone toggle — Topbar handles it */
+.sidenavToggle {
+  display: none;
+}
+
+.sidenavAuthBtn {
+  margin: 14px 28px;
+  padding: 10px 12px;
+  display: block;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Login button */
+.sidenavAuthBtn {
+  background: #2bbfb3;
+  color: white;
+  border: none;
+}
+
+.sidenavAuthBtn:hover {
+  background: #25a79c;
+  color: #fff;
+}
+
+/* Logout variant */
+.sidenavLogoutBtn {
+  background: #e05555;
+  color: white;
+  border: none;
+}
+
+.sidenavLogoutBtn:hover {
+  background: #ff6b6b;
+}
+
+.sidenavLogo {
+  height: 40px;
+  width: 100%;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
