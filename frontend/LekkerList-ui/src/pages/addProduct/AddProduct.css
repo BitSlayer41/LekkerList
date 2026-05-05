@@ -1,0 +1,135 @@
+.addProductContainer {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 36px 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.addProductContainer h2 {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e8622a;
+  margin-bottom: 28px;
+}
+
+/* From groups*/
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04rem;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: #2bbfb3;
+  box-shadow: 0 0 0 3px rgba(43, 191 179, 0.15);
+  background-color: #ffffff;
+}
+
+.formGroup textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.formGroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.addProductContainer button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #f5a623, #e8622a);
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    transform 0.15s;
+}
+
+a.addProductContainer button[type="submit"]:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.addProductContainer button[type="submit"]:active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Flash Message*/
+.flashMessage {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.flashMessage.success {
+  background: ragba(43, 191, 179, 0.3);
+  color: #2bbfb3;
+  border: 1px solid rgba(43, 191, 179, 0.3);
+}
+
+.flashMessage.error {
+  background: rgba(232, 98, 42, 0.1);
+  color: #e8622a;
+  border: 1px solid rgba(232, 98, 42, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+  .addProductConatiner {
+    margin: 20px 16px;
+    padding: 24px 20px;
+  }
+
+  .addProductConatiner h2 {
+    font-size: 1.3rem;
+  }
+}

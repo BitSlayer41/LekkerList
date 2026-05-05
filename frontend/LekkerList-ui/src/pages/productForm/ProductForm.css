@@ -1,0 +1,30 @@
+.formTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formCard {
+  width: 390px;
+  position: fixed;
+  margin: 30px 10px;
+}
+
+.form {
+  padding: 16;
+}
+
+.productInput {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  margin-bottom: 8;
+}
+
+.productImage {
+  margin-top: 8;
+  max-width: "100%";
+  max-height: 120;
+}

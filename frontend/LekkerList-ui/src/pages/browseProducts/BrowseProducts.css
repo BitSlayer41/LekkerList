@@ -1,0 +1,28 @@
+/* ── Browse products layout ── */
+.browseCentre {
+  text-align: center;
+  padding: 40px;
+}
+.browseFilter {
+  padding: 16px;
+}
+.browseSelect {
+  width: 220px;
+  margin-bottom: 16px;
+}
+.browseGrid {
+  padding: 16px;
+}
+
+/* Results */
+.browseResult {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-left: 1rem;
+}
+
+.browseNoResults {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  margin-top: 3rem;
+}

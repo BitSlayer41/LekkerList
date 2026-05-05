@@ -1,0 +1,318 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap");
+
+/* Keyframes */
+@keyframes msgSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Page Shell */
+.msgInbox {
+  display: flex;
+  height: calc(100vh - 56px);
+  font-family: "DM Sans", sans-serif;
+  background: #fdf8f4;
+  overflow: hidden;
+}
+
+/* Left Sidebar - conversation list */
+.msgSidebar {
+  width: 300px;
+  flex-shrink: 0;
+  border-right: 1.5px solid #f0ebe6;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.msgSidebarHeading {
+  font-family: "Syne", sans-serif;
+  font-family: 800;
+  font-size: 1rem;
+  color: #1a1a1a;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1.5px solid #f0ebe6;
+  margin: 0;
+}
+
+.msgSidebarList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Conversation row */
+
+.msgConvRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #f5f0ec;
+  transition: background 0.15s border-color 0.15s;
+}
+
+.msgConvRow:hover {
+  background: #fdf8f4;
+}
+
+.msgConvRowActive {
+  background: rgba(232, 98, 42, 0.06);
+}
+
+.msgConvInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.msgConvName {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msgConvLast {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msgConvTime {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* Avatar */
+.msgAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(43, 191, 179, 0.15);
+  color: #2bbfb3;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+/* Right - chat panel */
+.msgChat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.msgChatHeader {
+  padding: 1rem 1.4rem;
+  border-bottom: 1.5px solid #f0ebe6;
+  background: #fff;
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+/* Empty / loading states */
+.msgEmptyChat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: #9ca3af;
+  font-size: 0.88rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.msgPageSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(232, 98, 42, 0.15);
+  border-top-color: #e8622a;
+  border-radius: 50%;
+  animation: msgSpin 0.8s linear infinite;
+}
+
+/* Message List */
+.msgChatBox {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Bubble Wrapper*/
+.msgBubbleWrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.msgBubbleWrapMe {
+  justify-content: flex-end;
+}
+
+.msgBubbleWrapThem {
+  justify-content: flex-start;
+}
+
+/* Bubble */
+.msgBubble {
+  max-width: 68%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 18px;
+  word-break: break-word;
+}
+
+.msgBubbleMe {
+  background: #e8622a;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.msgBubbleThem {
+  background: #fff;
+  color: #1a1a1a;
+  border: 1.5px solid #f0ebe6;
+  border-bottom-left-radius: 4px;
+}
+
+.msgBubbleOptimistic {
+  opacity: 0.7;
+}
+
+.msgSenderName {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #2bbfb3;
+  margin-bottom: 0.15rem;
+}
+
+.msgBubbleMe.msgSenderName {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.msgText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.msgTime {
+  font-size: 0.62rem;
+  opacity: 0.6;
+  margin-top: 0.2rem;
+  text-align: right;
+}
+
+/* Input Row */
+.msgInputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem;
+  padding: 0.9rem 1.2rem;
+  background: #fff;
+  border-top: 1.5px solid #f0ebe6;
+  flex-shrink: 0;
+}
+
+.msgInput {
+  flex: 1;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 0.65rem 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.92rem;
+  color: #1a1a1a;
+  background: #fdf8f4;
+  outline: none;
+  resize: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  line-height: 1.5;
+}
+
+.msgInput:focus {
+  border-color: #e8622a;
+  box-shadow: 0 0 0 3px rgba(232, 98, 42, 0.1);
+  background: #fff;
+}
+
+.msgInput:disabled {
+  opacity: 0.5s;
+  cursor: not-allowed;
+}
+
+.msgSenderBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e8622a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(232, 98, 42, 0.3);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.msgSenderBtn:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(232, 98, 42, 0.4);
+}
+
+.msgSenderBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.msgSendSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: msgSpin 0.7s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .msgSidebar {
+    width: 100%;
+    height: 100%;
+  }
+
+  .msgInbox {
+    flex-direction: column;
+  }
+  .msgBubble {
+    max-width: 85%;
+  }
+}
