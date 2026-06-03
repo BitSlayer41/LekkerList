@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout . LekkerList</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/images/companyLogo.jpeg"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/Checkout.css" />
+  </head>
+  <body>
+    <!--NAV-->
+    <nav class="nav">
+      <a href="http://localhost:5173/" class="navLogo">LekkerList</a>
+      <div class="navSecure">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <image
+            href="../../frontend/LekkerList-ui/src/images/lock.svg"
+            width="16"
+            height="16"
+          />
+        </svg>
+        Secure Checkout
+      </div>
+    </nav>
+
+    <!--Layout-->
+    <div class="layout">
+      <!--Form-->
+      <form class="formPanel" id="checkForm" novalidate>
+        <div class="sectionTitle">Contact Information</div>
+        <div class="fieldRow">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="First Name"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Last Name" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="your@email.com"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+27 XX XXX XXXX" required />
+        </div>
+
+        <div class="sectionTitle">Shipping Address</div>
+        <div class="field">
+          <label for="street">Street Address</label>
+          <input
+            type="text"
+            id="street"
+            placeholder="123 Main Street"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="suburb">Suburb</label>
+          <input type="text" id="suburb" placeholder="Suburb" required />
+        </div>
+        <div class="fieldRow">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="City" required />
+          </div>
+          <div class="field">
+            <label for="postal">Postal Code</label>
+            <input
+              type="text"
+              id="postal"
+              placeholder="0000"
+              maxlength="4"
+              required
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label for="province">Province</label>
+          <select id="province" required>
+            <option>Gauteng</option>
+            <option>Western Cape</option>
+            <option>KwaZulu-Natal</option>
+            <option>Eastern Cape</option>
+            <option>Limpopo</option>
+            <option>Mpumalanga</option>
+            <option>North West</option>
+            <option>Free State</option>
+            <option>Northern Cape</option>
+          </select>
+        </div>
+
+        <div class="sectionTitle">Payment Details</div>
+        <div class="field">
+          <label for="cardName">Name on Card</label>
+          <input
+            type="text"
+            id="cardName"
+            placeholder="As it appears on your card"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            placeholder="0000 0000 0000 0000"
+            maxlength="19"
+            required
+          />
+        </div>
+        <div class="cardRow">
+          <div class="field">
+            <label for="expMonth">Expiry Month</label>
+            <select id="expMonth">
+              <option value="">Month</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="expYear">Expiry Year</label>
+            <select id="expYear">
+              <option value="">Year</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+              <option value="2031">2031</option>
+              <option value="2032">2032</option>
+              <option value="2033">2033</option>
+              <option value="2034">2034</option>
+              <option value="2035">2035</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cvv">CVV</label>
+            <input
+              type="password"
+              id="cvv"
+              placeholder="***"
+              maxlength="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="errorBox" id="errorBox"></div>
+
+        <div class="btnRow">
+          <button type="submit" class="submitBtn" id="submitBtn">
+            <span id="btnText">Pay Now</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+
+          <button type="button" class="cancelBtn" onclick="handleCancel()">
+            Cancel
+          </button>
+        </div>
+
+        <p class="secureNote">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <image
+              href="../../frontend/LekkerList-ui/src/images/lock.svg"
+              width="16"
+              height="16"
+            />
+          </svg>
+          Your payment info is encrypted and never stored
+        </p>
+      </form>
+
+      <!--Order Summary-->
+      <div class="orderPanel">
+        <div class="orderCard">
+          <div class="orderTitle">Order Summary</div>
+          <div id="orderItems"></div>
+          <hr class="orderDivider" />
+          <div class="orderRow">
+            <span>Subtotal</span>
+            <span id="subtotal">R0.00</span>
+          </div>
+          <div class="orderRow">
+            <span>Delivery</span>
+            <span style="color: #2bbfb3; font-weight: 600">Free</span>
+          </div>
+          <div class="orderTotal">
+            <span class="orderTotalLabel">Total</span>
+            <span class="orderTotalAmount" id="total">R0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Success Overlay-->
+    <div class="successOverlay" id="successOverlay">
+      <div class="successCard">
+        <div class="successIcon">
+          <img
+            src="../../frontend/LekkerList-ui/src/emoji/check.png"
+            alt="product"
+            style="
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />;
+        </div>
+        <h2>Lekker! Payment Successful</h2>
+        <p>
+          Baie Dankie for shopping with LekkerList - Mzansi's Marketplace! A
+          confirmation will be sent to your email shortly.
+        </p>
+
+        <button
+          class="successBtn"
+          onclick="window.location.href = 'http://localhost:5173/'"
+        >
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
+    <script src="../assets/js/checkout.js"></script>
+  </body>
+</html>
