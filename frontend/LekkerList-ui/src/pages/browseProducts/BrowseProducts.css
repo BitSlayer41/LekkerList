@@ -1,0 +1,57 @@
+/* ── Browse Products — mirrors MyProducts layout ── */
+
+.browseContainer {
+  padding: 24px;
+}
+
+/* ── Toolbar: search + category + result count ── */
+.browseToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.browseSelect {
+  min-width: 160px;
+}
+
+.browseResultCount {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ── Empty state ── */
+.browseCentre {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.browseEmptyText {
+  color: #6b7280;
+}
+
+/* ── Responsive toolbar ── */
+@media (max-width: 768px) {
+  .browseContainer {
+    padding: 16px;
+  }
+
+  .browseToolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .browseSelect {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .browseContainer {
+    padding: 12px;
+  }
+}

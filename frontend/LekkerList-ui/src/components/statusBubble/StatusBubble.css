@@ -1,0 +1,129 @@
+.statusBubble {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fdf8f4;
+  flex-wrap: wrap;
+}
+
+.statusHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.statusText {
+  color: orangered;
+  font-size: 0.95rem;
+}
+
+.statusControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Seller */
+.statusAdvanceBtn {
+  background: #2bbfb3;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.statusAdvanceBtn:hover:not(:disabled) {
+  background: #22a89d;
+  transform: translateY(-1px);
+}
+
+.statusAdvanceBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Customer */
+.statusDeliveryBtn {
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.statusDeliveryBtn:hover:not(:disabled) {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+.statusDeliveryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Admin */
+.statusAdminSelect {
+  background: #fff;
+  border: 1.5px solid #dc2626;
+  color: #dc2626;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.statusAdminSelect:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status-paid {
+  color: #10b981;
+}
+
+.status-processing {
+  color: #3b82f6;
+}
+
+.status-shipped {
+  color: #8b5cf6;
+}
+
+.status-delivered {
+  color: #22c55e;
+}
+
+.status-cancelled {
+  color: #ef4444;
+}
+
+.status-refunded {
+  color: #f97316;
+}

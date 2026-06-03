@@ -1,0 +1,33 @@
+.myProductsContainer {
+  padding: 24px;
+}
+
+.myProductsTitle {
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+.myProductsCentre {
+  text-align: center;
+  padding: 50px;
+}
+
+.myProductsEmptyText {
+  color: #6b7280;
+}
+
+.myProductsBtn {
+  background: #e8622a;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.myProductsBtn:hover {
+  background: #cf541f;
+  color: #fff;
+}

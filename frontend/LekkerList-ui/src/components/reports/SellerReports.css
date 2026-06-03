@@ -1,0 +1,186 @@
+/* Seller Reports page */
+.reportsPage {
+  padding: 24px;
+  background: #fdf8f4;
+  min-height: 100vh;
+}
+
+/* Header */
+.reportsHeader {
+  margin-bottom: 24px;
+}
+
+.reportsTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.reportsSubtitle {
+  font-size: 0.88rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Access denied */
+.accessDenied {
+  text-align: center;
+  padding: 80px 20px;
+  color: #6b7280;
+}
+
+.accessDenied h2 {
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+/* Loading / empty states */
+.reportsLoading {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.reportsEmpty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #9ca3af;
+}
+
+/* Seller Reports Table */
+.reportsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  font-size: 0.88rem;
+}
+
+.reportsTable thead tr {
+  background: #fdf8f4;
+  border-bottom: 1.5px solid #f0ebe6;
+}
+
+.reportsTable th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.reportsTable td {
+  padding: 12px 16px;
+  color: #1a1a1a;
+  vertical-align: middle;
+  border-bottom: 1px solid #f5f0ec;
+}
+
+.reportsTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reportsTable tbody tr:hover td {
+  background: #fdf8f4;
+}
+
+/* Reporter / seller info */
+.reportsUser {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.reportsEmail {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* Reason column */
+.reportsReason {
+  max-width: 320px;
+  line-height: 1.45;
+  color: #4b5563;
+}
+
+/* Actions */
+.reportsActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dismissBtn {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border: 1.5px solid rgba(239, 68, 68, 0.2);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.dismissBtn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+.reviewBtn {
+  background: rgba(135, 206, 235, 1);
+  color: #4169e1;
+  border: 1.5px solid rgba(68, 71, 239, 0.2);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.reviewBtn:hover {
+  background: rgba(68, 122, 239, 0.15);
+  border-color: rgba(68, 108, 239, 0.308);
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .reportsTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .reportsTable th,
+  .reportsTable td {
+    padding: 8px 10px;
+  }
+
+  .reportsTitle {
+    font-size: 1.4rem;
+  }
+
+  .reportsSubtitle {
+    font-size: 0.8rem;
+  }
+}

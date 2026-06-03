@@ -1,0 +1,258 @@
+/* Orders Page Layout */
+.ordersPage {
+  padding: 24px;
+  background: #f6f7fb;
+  min-height: 100vh;
+  color: #111827;
+}
+
+/* Header */
+.ordersHeader {
+  margin-bottom: 24px;
+}
+
+.ordersTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.ordersSubtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Orders List */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Order Card */
+.orderCard {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.orderCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+/* Card Header */
+.orderCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 16px;
+}
+
+.orderCardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.orderCardId {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.orderCardDate {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.orderCardRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.orderCustomer {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.orderTotal {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.orderChevron {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+/* Status Badge */
+.orderStatusBadge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Expanded Body */
+.orderCardBody {
+  margin-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Section Labels */
+.orderSectionLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+/* Shipping */
+.orderShipping {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+/* Items */
+.orderItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: #f9fafb;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.orderItemImg {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eef2f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderItemImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.orderItemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.orderItemTitle {
+  font-weight: 600;
+}
+
+.orderItemQty {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.orderItemPrice {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Summary */
+.orderSummary {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.orderSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.orderSummaryTotal {
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Loading / Empty States */
+.ordersLoading,
+.ordersEmpty {
+  background: white;
+  border-radius: 18px;
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.ordersSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #d1d5db;
+  border-top-color: #2bbfb3;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .orderCardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .orderCardRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .orderItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .orderItemPrice {
+    width: 100%;
+    text-align: right;
+  }
+}

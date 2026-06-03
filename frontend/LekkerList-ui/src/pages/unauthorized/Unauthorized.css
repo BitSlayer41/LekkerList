@@ -1,0 +1,126 @@
+.unauthorizedPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fb;
+  padding: 2rem;
+}
+
+.unauthorizedCard {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.unauthorizedIcon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: #ffe8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unauthorizedIcon svg {
+  width: 42px;
+  height: 42px;
+  fill: #ff4d4f;
+}
+
+.unauthorizedCode {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ff4d4f;
+  margin-bottom: 0.5rem;
+}
+
+.unauthorizedTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.unauthorizedText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.unauthorizedActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.unauthorizedBtn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.unauthorizedBtn:hover {
+  transform: translateY(-2px);
+}
+
+.unauthorizedBtnPrimary {
+  background: #ff4d4f;
+  color: #ffffff;
+}
+
+.unauthorizedBtnPrimary:hover {
+  background: #ff7875;
+}
+
+.unauthorizedBtnSecondary {
+  background: #f0f0f0;
+  color: #333333;
+}
+
+.unauthorizedBtnSecondary:hover {
+  background: #d9d9d9;
+}
+
+@media (max-width: 480px) {
+  .unauthorizedCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .unauthorizedCode {
+    font-size: 3rem;
+  }
+
+  .unauthorizedTitle {
+    font-size: 1.5rem;
+  }
+
+  .unauthorizedText {
+    font-size: 0.9rem;
+  }
+
+  .unauthorizedActions {
+    flex-direction: column;
+  }
+
+  .unauthorizedBtn {
+    width: 100%;
+  }
+}
