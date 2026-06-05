@@ -175,7 +175,7 @@ export default function Sidebar({ isOpen, onClose, activeNav, onNavChange }) {
       roles: ["guest", "customer", "seller", "super_admin", "content_admin"],
     },
     {
-      href: "/messages",
+      href: "/allMessages",
       label: "Messages",
       nav: "Messages",
       icon: <MessagesIcon className="sidenavIcon" />,
