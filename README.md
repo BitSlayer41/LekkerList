@@ -133,7 +133,6 @@ LekkerList/
 | Backend | PHP 8 |
 | Database | MySQL 8 |
 | Local server | XAMPP / Apache |
-| Production hosting | InfinityFree |
 
 ---
 
