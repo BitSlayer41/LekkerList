@@ -1,4 +1,4 @@
-// ── Admin product management — super_admin and content_admin only ──
+// Admin product management — super_admin and content_admin only
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Popconfirm, Spin, Tag } from "antd";
@@ -14,7 +14,7 @@ export default function Products() {
   const authData = useSelector((state) => state.authentication?.authData);
   const userInfo = authData?.user ?? null;
 
-  // ── Only super_admin and content_admin can manage products ──
+  // Only super_admin and content_admin can manage products
   const { canManageProducts } = useAdminRole(userInfo);
 
   const [products, setProducts] = useState([]);
@@ -45,7 +45,7 @@ export default function Products() {
   console.log("userInfo:", userInfo);
   console.log("adminRole:", userInfo?.admin_role);
   console.log("canManageProducts:", canManageProducts);
-  // ── Block non-admins ──
+  // Block non-admins
   if (!canManageProducts) {
     return (
       <div className="productsPage">
@@ -94,7 +94,7 @@ export default function Products() {
           <tbody>
             {products.map((p) => (
               <tr key={p._id}>
-                {/* ── Image ── */}
+                {/* Image */}
                 <td>
                   {p.image ? (
                     <img
@@ -107,7 +107,7 @@ export default function Products() {
                   )}
                 </td>
 
-                {/* ── Title ── */}
+                {/* Title */}
                 <td>
                   <div className="productsTableTitle">{p.title}</div>
                   <div className="productsTableDesc">
@@ -116,13 +116,13 @@ export default function Products() {
                   </div>
                 </td>
 
-                {/* ── Category ── */}
+                {/* Category */}
                 <td>{p.category ?? "—"}</td>
 
-                {/* ── Price ── */}
+                {/* Price */}
                 <td>R {Number(p.price).toFixed(2)}</td>
 
-                {/* ── Status ── */}
+                {/* Status */}
                 <td>
                   <Tag
                     color={
@@ -139,10 +139,10 @@ export default function Products() {
                   </Tag>
                 </td>
 
-                {/* ── Seller ── */}
+                {/* Seller */}
                 <td>{p.seller_name ?? `#${p.seller_id}`}</td>
 
-                {/* ── Actions ── */}
+                {/* Actions */}
                 <td className="productsTableActions">
                   <Popconfirm
                     title="Delete this product?"
