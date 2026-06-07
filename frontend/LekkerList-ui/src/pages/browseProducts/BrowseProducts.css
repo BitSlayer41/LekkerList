@@ -1,10 +1,10 @@
-/* ── Browse Products — mirrors MyProducts layout ── */
+/* Browse Products — mirrors MyProducts layout */
 
 .browseContainer {
   padding: 24px;
 }
 
-/* ── Toolbar: search + category + result count ── */
+/* Toolbar: search + category + result count */
 .browseToolbar {
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@
   color: #6b7280;
 }
 
-/* ── Empty state ── */
+/* Empty state */
 .browseCentre {
   text-align: center;
   padding: 60px 20px;
@@ -32,7 +32,7 @@
   color: #6b7280;
 }
 
-/* ── Responsive toolbar ── */
+/* Responsive toolbar */
 @media (max-width: 768px) {
   .browseContainer {
     padding: 16px;
