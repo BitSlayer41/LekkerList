@@ -80,8 +80,6 @@ LekkerList/
 │       │   ├── App.jsx             # Routes + layout
 │       │   ├── main.jsx            # React entry point
 │       │   └── store.js            # Redux store
-│       ├── .env                    # Local dev env vars
-│       ├── .env.production         # Production env vars
 │       ├── package.json
 │       └── vite.config.js
 │
@@ -127,12 +125,12 @@ LekkerList/
 
 | Layer | Technology |
 |---|---|
-| Frontend framework | React 18 + Vite 5 |
+| Frontend framework | React 18 + Vite 5 + HTML|
 | State management | Redux Toolkit + Redux Thunk |
 | Routing | React Router v6 |
 | UI components | Ant Design 5 |
 | HTTP client | Axios |
-| Backend | PHP 8 |
+| Backend | PHP 8 + JS |
 | Database | MySQL 8 |
 | Local server | XAMPP / Apache |
 
