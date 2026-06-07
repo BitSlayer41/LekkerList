@@ -6,6 +6,8 @@
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)
 ![PHP](https://img.shields.io/badge/PHP-8-777BB4?logo=php)
 ![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql)
+![HTML](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
 
 ---
 
