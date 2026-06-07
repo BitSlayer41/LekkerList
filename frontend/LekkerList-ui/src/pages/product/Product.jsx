@@ -1,4 +1,4 @@
-// ── Product card — seller sees edit/delete on their own listings only ──
+// Product card — seller sees edit/delete on their own listings only
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -31,7 +31,7 @@ export default function Product({ product }) {
   const userInfo = authData?.user ?? null;
   const role = userInfo?.role ?? "guest";
 
-  // ── Seller only sees actions on their OWN products ──
+  // Seller only sees actions on their OWN products
   const isOwner = userInfo && String(userInfo.id) === String(product.seller_id);
   const isCustomer = role === "customer";
 
@@ -72,7 +72,7 @@ export default function Product({ product }) {
       );
     }
 
-    // ── Only the seller who owns this product gets edit/delete ──
+    // Only the seller who owns this product gets edit/delete
     if (isOwner) {
       actions.push(
         <Button
