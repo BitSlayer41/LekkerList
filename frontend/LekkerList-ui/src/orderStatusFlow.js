@@ -7,7 +7,7 @@ export const NEXT_STATUS_MAP = {
   delivered: null,
 };
 
-// optional: labels for UI
+// labels for UI
 export const STATUS_LABELS = {
   paid: "Paid",
   processing: "Processing",
