@@ -41,12 +41,12 @@ export default function OrderChat() {
   const [orderItems, setOrderItems] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
-  /* ── Review state ── */
+  /* Review state */
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [reviewDone, setReviewDone] = useState(false);
 
-  /* ── Report state ── */
+  /* Report state */
   const [reportReason, setReportReason] = useState("");
   const [reporting, setReporting] = useState(false);
   const [reportDone, setReportDone] = useState(false);
@@ -55,7 +55,7 @@ export default function OrderChat() {
   const inputRef = useRef(null);
   const pollRef = useRef(null);
 
-  /* ── Role helpers ── */
+  /* Role helpers */
   const isCustomer = user?.role === "customer";
   const isSeller = user?.role === "seller";
 
@@ -107,7 +107,7 @@ export default function OrderChat() {
     [orderId, user?.id, receiverId],
   );
 
-  // Inital Load and poll every 5s
+  //Initial Load and poll every 5s
   useEffect(() => {
     fetchMessages();
     pollRef.current = setInterval(() => fetchMessages(true), 5000);
@@ -363,7 +363,7 @@ export default function OrderChat() {
 
   return (
     <div className="chatPage">
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="chatHeader">
         <button
           className="chatBackBtn"
@@ -391,7 +391,7 @@ export default function OrderChat() {
         </div>
       </div>
 
-      {/* ── Messages ── */}
+      {/* Messages */}
       <div className="chatMessages">
         {Object.keys(grouped).length === 0 ? (
           <div className="chatNoMessages">
@@ -436,7 +436,7 @@ export default function OrderChat() {
         <div ref={bottomRef} />
       </div>
 
-      {/* ── Input ── */}
+      {/* Input */}
       <div className="chatInputRow">
         <textarea
           ref={inputRef}
@@ -477,14 +477,14 @@ export default function OrderChat() {
         </button>
       </div>
 
-      {/* ── Review + Report tabs — customers only ── */}
+      {/* Review + Report tabs — customers only */}
       {isCustomer && (canReview || canReport) && (
         <div className="actionPanel">
           <Tabs
             defaultActiveKey={canReview ? "review" : "report"}
             className="actionTabs"
             items={[
-              /* ── Review tab — only on delivered orders ── */
+              /* Review tab — only on delivered orders */
               ...(canReview
                 ? [
                     {
@@ -543,7 +543,7 @@ export default function OrderChat() {
                   ]
                 : []),
 
-              /* ── Report tab — any customer on any order ── */
+              /* Report tab — any customer on any order */
               ...(canReport
                 ? [
                     {
