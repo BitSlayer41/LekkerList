@@ -1,4 +1,4 @@
-// ── Browse all products ──
+// Browse all products
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Spin, Empty, Select } from "antd";
@@ -38,12 +38,12 @@ export default function BrowseProducts() {
 
     let result = products;
 
-    // ── Filter by category ──
+    // Filter by category
     if (category !== "All") {
       result = result.filter((p) => p.category === category);
     }
 
-    // ── Filter by search query ──
+    // Filter by search query
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       result = result.filter(
@@ -77,7 +77,7 @@ export default function BrowseProducts() {
 
   return (
     <div className="browseContainer">
-      {/* ── Search + Filter bar ── */}
+      {/* Search + Filter bar */}
       <div className="browseToolbar">
         <SearchBar onSearch={handleSearch} query={searchQuery} />
 
@@ -93,7 +93,7 @@ export default function BrowseProducts() {
           ))}
         </Select>
 
-        {/* ── Result count ── */}
+        {/* Result count */}
         {(searchQuery || category !== "All") && (
           <span className="browseResultCount">
             {filteredProducts.length} result
@@ -103,7 +103,7 @@ export default function BrowseProducts() {
         )}
       </div>
 
-      {/* ── Products grid */}
+      {/* Products grid */}
       {filteredProducts.length === 0 ? (
         <div className="browseCentre">
           <Empty
