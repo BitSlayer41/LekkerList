@@ -22,7 +22,7 @@ LekkerList is a feature-rich marketplace web application built for South African
 - 🔐 **Authentication** — Register, login, reset password with role-based access
 - 🛍️ **Browse & Search** — Live product search by title, description, seller, or category
 - 🏪 **Seller Tools** — Add, edit, delete listings, view sales dashboard and earnings
-- 🛒 **Cart & Checkout** — Persistent cart, 15% VAT, ZAR pricing, order confirmation
+- 🛒 **Cart & Checkout** — Persistent cart, ZAR pricing, order confirmation
 - 📦 **Order Lifecycle** — `paid → processing → shipped → delivered` driven by roles
 - 💬 **Order Messaging** — Scoped chat per order between buyer and seller
 - ⭐ **Product Reviews** — Star rating + comment, displayed on product cards
