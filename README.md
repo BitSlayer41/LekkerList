@@ -13,7 +13,7 @@
 
 ## 📸 Overview
 
-LekkerList is a feature-rich marketplace web application built for South African buyers and sellers. It supports multiple user roles, real-time messaging, a full checkout flow with VAT, order tracking, seller reports, product reviews, and a multi-tier admin dashboard.
+LekkerList is a feature-rich marketplace web application built for South African buyers and sellers. It supports multiple user roles, real-time messaging, a full checkout flow, order tracking, seller reports, product reviews, and a multi-tier admin dashboard.
 
 ---
 
@@ -314,7 +314,7 @@ CREATE TABLE order_status_history (
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/LekkerList.git
+git clone https://github.com/BitSlayer41/LekkerList.git
 cd LekkerList
 ```
 
@@ -427,7 +427,8 @@ WHERE email = 'your@email.com';
 > All colours are written inline — no CSS custom properties are used.
 
 ---
-
+Link to live website:
+`https://lekkerlist.infinityfreeapp.com/`
 
 ---
 
