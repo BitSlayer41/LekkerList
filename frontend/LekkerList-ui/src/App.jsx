@@ -28,6 +28,8 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import { CartProvider } from "./components/cart/CartProvider";
 
+import useSessionGuard from "./components/hooks/useSessionGuard";
+
 import "./App.css";
 
 const PATH_TO_NAV = {
@@ -90,6 +92,8 @@ function AppLayout() {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const activeNav = PATH_TO_NAV[location.pathname] || "Home";
+
+  useSessionGuard();
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
