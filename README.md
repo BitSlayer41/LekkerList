@@ -427,8 +427,8 @@ WHERE email = 'your@email.com';
 > All colours are written inline — no CSS custom properties are used.
 
 ---
-Link to live website:
-`https://lekkerlist.infinityfreeapp.com/`
+## Live website:
+Link: `https://lekkerlist.infinityfreeapp.com/`
 
 ---
 
