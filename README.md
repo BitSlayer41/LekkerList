@@ -384,7 +384,7 @@ WHERE email = 'your@email.com';
 | **Seller** | All customer features + listings, sales dashboard, earnings |
 | **Super Admin** | Everything — user management, role assignment, reports |
 | **Finance Admin** | Orders, earnings, cancel/refund orders |
-| **Content Admin** | Product management — add, edit, delete any listing |
+| **Content Admin** | Product management — delete any listing |
 
 ---
 
