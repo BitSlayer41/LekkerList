@@ -327,12 +327,12 @@ cp -r backend/ C:/xampp/htdocs/LekkerList/backend/
 
 1. Start **Apache** and **MySQL** in XAMPP Control Panel
 2. Open [phpMyAdmin](http://localhost/phpmyadmin)
-3. Create a database named `lekkerlist`
+3. Create a database named `marketplace`
 4. Run the SQL schema above
 5. Update `backend/config/database.php`:
 
 ```php
-$conn = new mysqli("localhost", "root", "", "lekkerlist");
+$conn = new mysqli("localhost", "root", "", "marketplace");
 ```
 
 ### 3. Set up the frontend
