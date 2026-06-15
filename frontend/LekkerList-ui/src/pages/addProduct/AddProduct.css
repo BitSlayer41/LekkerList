@@ -122,6 +122,19 @@ a.addProductContainer button[type="submit"]:hover {
   border: 1px solid rgba(232, 98, 42, 0.25);
 }
 
+.blockedSeller {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.blockedMessage {
+  color: #dc2626;
+  font-weight: 600;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
 /* Responsive */
 @media (max-width: 680px) {
   .addProductConatiner {
