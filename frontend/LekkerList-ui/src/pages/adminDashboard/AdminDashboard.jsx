@@ -35,11 +35,12 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [reports] = useState([]);
 
   const adminId = admin?.user?.id || admin?.id;
 
   const isFinanceAdmin = adminRole === "finance_admin";
-
+  const isSuperAdmin = adminRole === "super_admin";
   const isContentAdmin = adminRole === "content_admin";
 
   const usersRef = useRef(null);
@@ -288,6 +289,8 @@ export default function AdminDashboard() {
     return stats;
   }, [users, adminRole, orders.length, totalRevenue]);
 
+  const pendingReports = reports.filter((r) => r.status === "pending").length;
+
   return (
     <div className="adminPage">
       {/* Header */}
@@ -305,6 +308,18 @@ export default function AdminDashboard() {
           </p>
         </div>
       </div>
+      {isSuperAdmin && pendingReports > 0 && (
+        <div
+          className="adminReportAlert"
+          onClick={() => scrollToSection(reportsRef)}
+        >
+          <AdminIcon className="Icon" />
+          <span>
+            {pendingReports} pending seller report
+            {pendingReports !== 1 ? "s" : ""}
+          </span>
+        </div>
+      )}
 
       {/* Stats row */}
       {canManageAdmins && (
@@ -352,12 +367,24 @@ export default function AdminDashboard() {
           </button>
         )}
 
-        {canManageAdmins && (
+        {canViewEarnings && (
           <button
             className="adminQuickBtn"
+            onClick={() => scrollToSection(earningsRef)}
+          >
+            View Earnings
+          </button>
+        )}
+
+        {isSuperAdmin && (
+          <button
+            className="adminQuickBtn adminQuickBtnAlert"
             onClick={() => scrollToSection(reportsRef)}
           >
-            Sellers Reported
+            Seller Reports{" "}
+            {pendingReports > 0 && (
+              <span className="adminReportBadge">({pendingReports})</span>
+            )}
           </button>
         )}
       </div>
@@ -502,7 +529,11 @@ export default function AdminDashboard() {
           </div>
 
           <div className="adminSectionContent">
-            <SellerReports />
+            <SellerReports
+              adminId={adminId}
+              isSuperAdmin={isSuperAdmin}
+              setUsers={setUsers}
+            />
           </div>
         </div>
       )}
