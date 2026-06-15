@@ -42,7 +42,8 @@ $stmt = $conn -> prepare("
         role, 
         admin_role, 
         image, 
-        password 
+        password,
+        is_blocked
     FROM users 
     WHERE email = ? LIMIT 1
 ");
@@ -71,7 +72,8 @@ echo json_encode(["success" => true, "message" => "Login Successful", "token" =>
     "role" => $userInfo['role'],
     "admin_role" => $userInfo['admin_role'],
     "image" => $userInfo['image'],
-],
+    "is_blocked" => (bool)$userInfo['is_blocked'],
+]
 ]);
 
 $conn -> close();
