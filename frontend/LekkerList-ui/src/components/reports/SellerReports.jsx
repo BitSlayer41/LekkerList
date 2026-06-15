@@ -1,52 +1,60 @@
-// Seller reports
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Button, Spin, Tag } from "antd";
-import useAdminRole from "../hooks/useAdminRole";
 import "./SellerReports.css";
 
-export default function SellerReports() {
-  const authData = useSelector((state) => state.authentication?.authData);
-
-  const userInfo = authData?.user ?? null;
-
-  // Only the super admin can manage the reports
-  const { canManageAdmins, adminRole } = useAdminRole(userInfo);
-
+export default function SellerReports({ adminId, isSuperAdmin, setUsers }) {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const normalizeStatus = (status) => status?.toLowerCase().trim();
+
+  const isPending = (status) => normalizeStatus(status) === "pending";
+
+  const pendingReports = reports.filter((r) => isPending(r.status)).length;
+
+  const formatDate = (date) =>
+    new Date(date).toLocaleDateString("en-ZA", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
   useEffect(() => {
-    if (!userInfo?.id || !canManageAdmins) return;
+    if (!isSuperAdmin || !adminId) return;
 
     const fetchReports = async () => {
       try {
         const res = await fetch(
-          `http://localhost/LekkerList/backend/api/getReports.php?requesting_id=${userInfo.id}`,
+          `http://localhost/LekkerList/backend/api/getReports.php?requesting_id=${adminId}`,
         );
 
-        const json = await res.json();
+        const data = await res.json();
 
-        setReports(json?.reports ?? []);
+        if (data.success) {
+          setReports(data.reports ?? []);
+        }
       } catch (err) {
-        console.error("failed to fetch reports: ", err);
+        console.error("Error fetching reports:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchReports();
-  }, [userInfo, canManageAdmins]);
 
-  const updateReportStatus = async (id, status) => {
+    fetchReports();
+  }, [adminId, isSuperAdmin]);
+
+  const updateReport = async (reportId, newStatus) => {
     try {
       const res = await fetch(
-        `http://localhost/LekkerList/backend/api/getReports.php?requesting_id=${userInfo.id}`,
+        `http://localhost/LekkerList/backend/api/getReports.php?requesting_id=${adminId}`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
-            id,
-            status,
+            id: reportId,
+            status: newStatus,
           }),
         },
       );
@@ -55,38 +63,85 @@ export default function SellerReports() {
 
       if (data.success) {
         setReports((prev) =>
-          prev.map((r) => (r.id === id ? { ...r, status } : r)),
+          prev.map((report) =>
+            report.id === reportId ? { ...report, status: newStatus } : report,
+          ),
         );
-      } else {
-        alert(data.error || "failed to update report");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error updating report:", err);
     }
   };
 
-  // Block non supers
-  if (adminRole !== "super_admin") {
+  const toggleBlockUser = async (id, current) => {
+    const action = current ? "unblock" : "block";
+
+    const confirmBlock = window.confirm(
+      `Are you sure you want to ${action} this user?`,
+    );
+
+    if (!confirmBlock) return;
+
+    try {
+      const res = await fetch(
+        "http://localhost/LekkerList/backend/api/users.php",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id,
+            is_blocked: current ? 0 : 1,
+            requestingId: adminId,
+          }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        if (setUsers) {
+          setUsers((prev) =>
+            prev.map((u) =>
+              u.id === id ? { ...u, is_blocked: current ? 0 : 1 } : u,
+            ),
+          );
+        }
+
+        setReports((prev) =>
+          prev.map((r) =>
+            r.reported_id === id
+              ? {
+                  ...r,
+                  reported_is_blocked: current ? 0 : 1,
+                }
+              : r,
+          ),
+        );
+      }
+    } catch (err) {
+      console.error(`Error trying to ${action} user:`, err);
+    }
+  };
+
+  if (!isSuperAdmin) {
     return (
-      <div className="reportsPage">
-        <div className="AccessDenied">
-          <h2>Access Denied</h2>
-          <p>Only Super Admins can manage seller reports</p>
-        </div>
+      <div className="reportsEmpty">
+        <p>Only Super Admins can manage seller reports.</p>
       </div>
     );
   }
 
   return (
-    <div className="reportsPage">
+    <>
       <div className="reportsHeader">
-        <h1 className="reportsTitle">Seller Reports</h1>
-
-        <p className="reportsSubtitle">
-          {loading
-            ? "Loading..."
-            : `${reports.length} report${reports.length !== 1 ? "s" : ""} found`}
-        </p>
+        <h2 className="reportsTitle">
+          Seller Reports
+          {pendingReports > 0 && (
+            <span className="reportsBadge">{pendingReports} pending</span>
+          )}
+        </h2>
       </div>
 
       {loading ? (
@@ -95,98 +150,111 @@ export default function SellerReports() {
         </div>
       ) : reports.length === 0 ? (
         <div className="reportsEmpty">
-          <p>No seller has been reported</p>
+          <p>No seller reports yet.</p>
         </div>
       ) : (
         <table className="reportsTable">
           <thead>
             <tr>
               <th>Order</th>
-              <th>Reporter</th>
+              <th>Reported By</th>
               <th>Reported Seller</th>
               <th>Reason</th>
-              <th>Status</th>
               <th>Date</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            {reports.map((report) => (
-              <tr key={report.id}>
-                {/* Order */}
-                <td>#{report.order_id}</td>
+            {reports.map((r) => (
+              <tr key={r.id}>
+                <td>#{r.order_id}</td>
 
-                {/* Reporter */}
                 <td>
                   <div className="reportsUser">
-                    {report.reporter_firstname} {report.reporter_lastname}
+                    {r.reporter_firstname} {r.reporter_lastname}
                   </div>
-
-                  <div className="reportsEmail">{report.reporter_email}</div>
+                  <div className="reportsEmail">{r.reporter_email}</div>
                 </td>
 
-                {/* Reported Seller */}
                 <td>
                   <div className="reportsUser">
-                    {report.reported_firstname} {report.reported_lastname}
+                    {r.reported_firstname} {r.reported_lastname}
+                    {Number(r.reported_is_blocked) === 1 && (
+                      <span className="blockedBadge">Blocked</span>
+                    )}
                   </div>
 
-                  <div className="reportsEmail">{report.reported_email}</div>
+                  <div className="reportsEmail">{r.reported_email}</div>
                 </td>
 
-                {/* Reason */}
-                <td className="reportsReason">{report.reason}</td>
+                <td className="reportsReason">{r.reason}</td>
 
-                {/* Status */}
+                <td className="reportsDate">{formatDate(r.created_at)}</td>
+
                 <td>
                   <Tag
                     color={
-                      report.status === "pending"
+                      isPending(r.status)
                         ? "orange"
-                        : report.status === "reviewed"
+                        : normalizeStatus(r.status) === "reviewed"
                           ? "green"
-                          : "red"
+                          : "default"
                     }
                   >
-                    {report.status}
+                    {r.status}
                   </Tag>
                 </td>
 
-                {/* Date */}
                 <td>
-                  {new Date(report.created_at).toLocaleDateString("en-ZA", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </td>
+                  <div className="reportsActions">
+                    {isPending(r.status) && (
+                      <>
+                        <Button
+                          size="small"
+                          className="reviewBtn"
+                          onClick={() => updateReport(r.id, "reviewed")}
+                        >
+                          Mark Reviewed
+                        </Button>
 
-                {/* Actions */}
-                <td className="reportsActions">
-                  <Button
-                    type="primary"
-                    onClick={() => updateReportStatus(report.id, "reviewed")}
-                    className="reviewBtn"
-                  >
-                    Review
-                  </Button>
+                        <Button
+                          size="small"
+                          className="dismissBtn"
+                          onClick={() => updateReport(r.id, "dismissed")}
+                        >
+                          Dismiss
+                        </Button>
+                      </>
+                    )}
 
-                  <Button
-                    danger
-                    type="primary"
-                    onClick={() => updateReportStatus(report.id, "dismissed")}
-                    disabled={report.status === "dismissed"}
-                    className="dismissBtn"
-                  >
-                    Dismiss
-                  </Button>
+                    {r.reported_id && (
+                      <button
+                        className={
+                          Number(r.reported_is_blocked) === 1
+                            ? "adminUnblockBtn"
+                            : "adminBlockBtn"
+                        }
+                        onClick={() =>
+                          toggleBlockUser(
+                            r.reported_id,
+                            Number(r.reported_is_blocked) === 1,
+                          )
+                        }
+                      >
+                        {Number(r.reported_is_blocked) === 1
+                          ? "Unblock Seller"
+                          : "Block Seller"}
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 }
