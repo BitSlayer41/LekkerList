@@ -10,10 +10,11 @@ const AddProduct = () => {
 
   const authData = useSelector((state) => state.authentication?.authData);
   const userInfo = authData?.user ?? null;
-  const fullName =
-    `${userInfo?.firstname ?? ""} ${userInfo?.lastname ?? ""}`.trim();
 
   const flashMessage = useSelector((state) => state.flashMessage);
+
+  // blocked status
+  const isBlocked = Number(userInfo?.is_blocked) === 1;
 
   const [formData, setFormData] = useState({
     product_title: "",
@@ -54,7 +55,14 @@ const AddProduct = () => {
       return;
     }
 
-    console.log("Submitting ID: ", userInfo.id);
+    // BLOCKED SELLER GUARD
+    if (isBlocked) {
+      alert("You are blocked and cannot add products.");
+      return;
+    }
+
+    const fullName =
+      `${userInfo?.firstname ?? ""} ${userInfo?.lastname ?? ""}`.trim();
 
     const finalData = {
       requesting_id: userInfo.id,
@@ -66,10 +74,22 @@ const AddProduct = () => {
       },
     };
 
-    console.log("finalData: ", JSON.stringify(finalData, null, 2));
     dispatch(createProduct(finalData));
     navigate("/myProducts");
   };
+
+  // BLOCKED UI SCREEN
+  if (isBlocked) {
+    return (
+      <div className="addProductContainer blockedSeller">
+        <h2>Access Restricted</h2>
+        <p className="blockedMessage">
+          Your seller account has been blocked. You cannot add new products.
+          Please contact support or an admin for assistance.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="addProductContainer">
@@ -80,7 +100,6 @@ const AddProduct = () => {
           <label>Title</label>
           <input
             name="product_title"
-            placeholder="Title"
             value={formData.product_title}
             onChange={handleChange}
             required
@@ -91,7 +110,6 @@ const AddProduct = () => {
           <label>Description</label>
           <textarea
             name="product_description"
-            placeholder="Description"
             value={formData.product_description}
             onChange={handleChange}
             required
@@ -103,7 +121,6 @@ const AddProduct = () => {
           <input
             type="number"
             name="product_price"
-            placeholder="Price"
             value={formData.product_price}
             onChange={handleChange}
             required
@@ -119,7 +136,6 @@ const AddProduct = () => {
           <label>Category</label>
           <select
             name="category_id"
-            id="category"
             value={formData.category_id}
             onChange={handleChange}
             required
