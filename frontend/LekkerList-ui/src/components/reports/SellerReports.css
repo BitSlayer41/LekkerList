@@ -161,6 +161,67 @@
   transform: translateY(-1px);
 }
 
+/* Block button — purple */
+.adminBlockBtn {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  border: 1.5px solid rgba(124, 58, 237, 0.2);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.adminBlockBtn:hover {
+  background: rgba(124, 58, 237, 0.18);
+  border-color: rgba(124, 58, 237, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Unblock button — green */
+.adminUnblockBtn {
+  background: rgba(22, 163, 74, 0.12);
+  color: #16a34a;
+  border: 1.5px solid rgba(22, 163, 74, 0.2);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.adminUnblockBtn:hover {
+  background: rgba(22, 163, 74, 0.18);
+  border-color: rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Blocked badge — shown next to user name */
+.blockedBadge {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 /* Responsive */
 @media (max-width: 900px) {
   .reportsTable {
