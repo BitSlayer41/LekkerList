@@ -1,5 +1,6 @@
 <?php
 
+// Create a new product listing
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/permissions.php';
 
@@ -15,101 +16,117 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(["error" => "Method not allowed"]);
+    echo json_encode(["success" => false, "error" => "Method not allowed"]);
     exit;
 }
 
-// Parse request
-$body = json_decode(file_get_contents("php://input"), true);
 
-if (!$body) {
+$data = json_decode(file_get_contents("php://input"), true);
+
+$product = $data['product'] ?? [];
+
+$sellerId = (int)($product['seller_id'] ?? 0);
+$sellerName = $product['seller_name'] ?? '';
+$title = trim($product['product_title'] ?? '');
+$description = trim($product['product_description'] ?? '');
+$price = (float)($product['product_price'] ?? 0);
+$category = $product['category_id'] ?? '';
+$image = $product['product_image'] ?? null;
+$status = $product['status'] ?? 'active';
+
+$requestingId = (int)($data['requesting_id'] ?? $sellerId);
+
+
+if (!$sellerId || !$title || !$price || !$category) {
     http_response_code(400);
-    echo json_encode(["error" => "Invalid JSON body"]);
+    echo json_encode(["success" => false, "error" => "Missing required fields"]);
     exit;
 }
 
-$p = $body['product'] ?? null;
-
-if (!$p) {
-    http_response_code(400);
-    echo json_encode(["error" => "No product data"]);
-    exit;
-}
-
-// Auth check
-$requestingId = (int)($body['requesting_id'] ?? 0);
-
-if (!$requestingId) {
-    http_response_code(400);
-    echo json_encode(["error" => "Missing requesting_id"]);
-    exit;
-}
-
-// Get user
-$userStmt = $conn->prepare("SELECT role, is_verified, firstname FROM users WHERE id = ?");
+// Fetch requester info and check permissions
+$userStmt = $conn->prepare("SELECT role, admin_role, is_blocked FROM users WHERE id = ?");
 $userStmt->bind_param("i", $requestingId);
 $userStmt->execute();
-$user = $userStmt->get_result()->fetch_assoc();
+$requester = $userStmt->get_result()->fetch_assoc();
 $userStmt->close();
 
-if (!$user) {
+// GLOBAL BLOCK CHECK
+if (!empty($requester['is_blocked']) && (int)$requester['is_blocked'] === 1) {
     http_response_code(403);
-    echo json_encode(["error" => "Invalid user"]);
+    echo json_encode([
+        "success" => false,
+        "message" => "User is blocked from performing this action"
+    ]);
     exit;
 }
 
-// Role check
-if ($user['role'] !== 'seller') {
-    http_response_code(403);
-    echo json_encode(["error" => "Only sellers can create products"]);
-    exit;
+$isAdmin = ($requester['role'] ?? '') === 'admin';
+
+if ($isAdmin) {
+    // Admins can manage products — check permission
+    requirePermission($conn, $requestingId, 'manage_products');
+} else {
+    // check if seller is blocked before allowing listing
+    $sellerStmt = $conn->prepare("SELECT is_blocked FROM users WHERE id = ? AND role = 'seller'");
+    $sellerStmt->bind_param("i", $sellerId);
+    $sellerStmt->execute();
+    $seller = $sellerStmt->get_result()->fetch_assoc();
+    $sellerStmt->close();
+
+    if (!$seller) {
+        http_response_code(403);
+        echo json_encode(["success" => false, "error" => "Seller account not found"]);
+        exit;
+    }
+
+    if ((int) $seller['is_blocked'] === 1) {
+        http_response_code(403);
+        echo json_encode([
+            "success" => false,
+            "error"   => "Your account has been blocked from listing new products. Please contact the admin.",
+        ]);
+        exit;
+    }
 }
 
-// Product fields
-$title = trim($p['product_title'] ?? '');
-$description = trim($p['product_description'] ?? '');
-$category = $p['category_id'] ?? null;
-$image = $p['product_image'] ?? null;
-$price = isset($p['product_price']) ? (float)$p['product_price'] : 0;
-$status = $p['status'] ?? 'active';
+// Validate status
+$allowedStatuses = ['active', 'inactive', 'sold'];
+if (!in_array($status, $allowedStatuses)) {
+    $status = 'active';
+}
 
-$sellerId = $requestingId;
-$sellerName = $user['firstname'] ?? '';
-
-// Insert product
+// Insert product into database
 $stmt = $conn->prepare("
-    INSERT INTO products 
-    (product_title, product_description, category_id, product_image, product_price, status, seller_id, seller_name)
+    INSERT INTO products
+        (seller_id, seller_name, product_title, product_description,
+         product_price, category_id, product_image, status)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 ");
-
-if (!$stmt) {
-    http_response_code(500);
-    echo json_encode(["error" => $conn->error]);
-    exit;
-}
-
 $stmt->bind_param(
-    "ssssdsis",
+    "isssdsss",
+    $sellerId,
+    $sellerName,
     $title,
     $description,
+    $price,
     $category,
     $image,
-    $price,
-    $status,
-    $sellerId,
-    $sellerName
+    $status
 );
 
 if ($stmt->execute()) {
+    $newId = $conn->insert_id;
+    $stmt->close();
+    $conn->close();
     echo json_encode([
-        "success" => true,
-        "message" => "Product added successfully"
+        "success"    => true,
+        "message"    => "Product created successfully",
+        "product_id" => $newId,
     ]);
 } else {
+    $err = $stmt->error;
+    $stmt->close();
+    $conn->close();
     http_response_code(500);
-    echo json_encode(["error" => $stmt->error]);
+    echo json_encode(["success" => false, "error" => $err]);
 }
-
-$stmt->close();
-$conn->close();
