@@ -153,7 +153,7 @@ export default function Orders() {
                         orderId={o.order_id}
                         currentStatus={currentStatus}
                         user={user}
-                        sellerId={sellerIds[0] ?? null}
+                        sellerIds={sellerIds}
                         onStatusChange={(newStatus) =>
                           handleStatusChange(o.order_id, newStatus)
                         }
