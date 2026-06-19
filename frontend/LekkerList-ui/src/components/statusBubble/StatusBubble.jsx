@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Spin } from "antd";
 import "./StatusBubble.css";
 
-const API_URL = "http://localhost/LekkerList/backend/api/updateOrderStatus.php";
-
 // Seller can advnace through this chain only
 const SELLER_NEXT = {
   paid: "processing",
@@ -12,7 +10,7 @@ const SELLER_NEXT = {
 
 // Label shown on the seller advance button
 const SELLER_BTN_LABEL = {
-  padi: "Mark as Processing",
+  paid: "Mark as Processing",
   processing: "Mark as Shipped",
 };
 
@@ -42,7 +40,7 @@ export default function StatusBubble({
   const callUpdate = async (newStatus) => {
     setSaving(true);
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch("http://localhost/LekkerList/backend/api/updateOrderStatus.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,14 +65,14 @@ export default function StatusBubble({
     }
   };
 
-  // Seller advnace button
+  // Seller advance button
   const sellerNextStatus = SELLER_NEXT[status];
   const showSellerBtn = isSeller && !!sellerNextStatus;
 
-  // Customer confirm delivery
+  // Customer confirms delivery
   const showDeliveryBtn = isCustomer && status === "shipped";
 
-  // Admin cancel / refund
+  // Admin cancel/refund
   const showAdminControls =
     isAdmin && !["cancelled", "refunded", "delivered"].includes(status);
 
