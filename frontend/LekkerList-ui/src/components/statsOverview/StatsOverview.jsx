@@ -50,6 +50,7 @@ export default function StatsOverview() {
       let totalEarnings = 0;
 
       orders.forEach((order) => {
+        if (order.status !== "paid") return;
         (order.items ?? []).forEach((item) => {
           itemsSold += Number(item.qty ?? 1);
         });
