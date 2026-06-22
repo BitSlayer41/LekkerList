@@ -21,7 +21,7 @@ export const fetchProducts = () => api.get("/api/getProducts.php");
 export const createProduct = (product) =>
   api.post("/api/createProduct.php", product);
 export const updateProduct = (id, product) =>
-  api.put(`/api/updateProduct.php?id=${id}`, { product });
+  api.put(`/api/updateProduct.php?id=${id}`, product);
 
 export const deleteProduct = (id, requestingId) =>
   api.delete(`/api/deleteProduct.php?id=${id}`, {
