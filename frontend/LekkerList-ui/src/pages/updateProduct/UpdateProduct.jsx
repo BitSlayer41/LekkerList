@@ -35,7 +35,7 @@ export default function UpdateProduct() {
     async function loadProduct() {
       try {
         const res = await fetch(
-          `https://lekkerlist.infinityfreeapp.com/backend/api/getProduct.php?id=${id}`,
+          `http://localhost/LekkerList/backend/api/getProduct.php?id=${id}`,
         );
 
         const result = await res.json();
