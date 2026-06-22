@@ -15,9 +15,7 @@ export default function UpdateProduct() {
   const [loading, setLoading] = useState(false);
 
   // Get product directly
-  const existing = useSelector((state) =>
-    state.products.find((p) => String(p._id) === String(id)),
-  );
+  const [existing, setExisting] = useState(null);
 
   const authData = useSelector((state) => state.authentication?.authData);
   const user = authData ?? JSON.parse(localStorage.getItem("profile"));
@@ -34,18 +32,39 @@ export default function UpdateProduct() {
   });
 
   useEffect(() => {
-    if (existing) {
-      setFormData({
-        product_title: existing.product_title || "",
-        product_description: existing.product_description || "",
-        product_price: existing.product_price || "",
-        product_image: existing.product_image || "",
-        category_id: existing.category_id || "",
-        status: existing.status || "active",
-        seller_id: existing.seller_id || userInfo?.id || 0,
-      });
+    async function loadProduct() {
+      try {
+        const res = await fetch(
+          `https://lekkerlist.infinityfreeapp.com/backend/api/getProduct.php?id=${id}`,
+        );
+
+        const result = await res.json();
+
+        if (result.success && result.data?.product) {
+          const product = result.data.product;
+
+          setExisting(product);
+
+          setFormData({
+            product_title: product.product_title || "",
+            product_description: product.product_description || "",
+            product_price: product.product_price || "",
+            product_image: product.product_image || "",
+            category_id: product.category_id || "",
+            status: product.status || "active",
+            seller_id: product.seller_id || userInfo?.id,
+          });
+        } else {
+          setExisting(null);
+        }
+      } catch (err) {
+        console.error(err);
+        setExisting(null);
+      }
     }
-  }, [existing, userInfo]);
+
+    loadProduct();
+  }, [id, userInfo?.id]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -68,13 +87,13 @@ export default function UpdateProduct() {
 
     const payload = {
       product: {
+        seller_id: userInfo.id,
         product_title: formData.product_title,
         product_description: formData.product_description,
         product_price: formData.product_price,
         product_image: formData.product_image,
         category_id: formData.category_id || "",
         status: formData.status || "active",
-        seller_id: formData.seller_id || userInfo?.id || 0,
       },
     };
 
@@ -85,7 +104,7 @@ export default function UpdateProduct() {
 
       // small dely so user sees message
       setTimeout(() => {
-        navigate("/");
+        navigate("/myProducts");
       }, 800);
     } catch (err) {
       console.error(err);
@@ -160,7 +179,7 @@ export default function UpdateProduct() {
 
             <Button
               htmlType="button"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/myProducts")}
               className="updateCancelBtn"
             >
               Cancel
