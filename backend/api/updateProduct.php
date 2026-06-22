@@ -30,11 +30,11 @@ if (!$id) {
 $body = json_decode(file_get_contents("php://input"), true);
 $p = $body['product'] ?? null;
 
-$requestingId = (int)($body['requesting_id'] ?? 0);
+$requestingId = (int)($p['seller_id'] ?? 0);
 
 if (!$p || !$requestingId) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing data"]);
+    echo json_encode(["error" => "Missing product or seller ID"]);
     exit;
 }
 
@@ -52,8 +52,8 @@ if (!$user || $user['role'] !== 'seller') {
     exit;
 }
 
-//Check ownership
-$stmt = $conn->prepare("SELECT seller_id FROM products WHERE product_id = ?");
+//Check ownership edited
+$stmt = $conn->prepare("SELECT * FROM products WHERE product_id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $product = $stmt->get_result()->fetch_assoc();
@@ -71,13 +71,15 @@ if ((int)$product['seller_id'] !== $requestingId) {
     exit;
 }
 
-// Save update
-$title = $p['product_title'] ?? '';
-$description = $p['product_description'] ?? '';
-$category = $p['category_id'] ?? '';
-$image = $p['product_image'] ?? '';
-$price = (float)($p['product_price'] ?? 0);
-$status = $p['status'] ?? 'active';
+// Save update edited
+
+$title = $p['product_title'] ?? $product['product_title'];
+$description = $p['product_description'] ?? $product['product_description'];
+$category = $p['category_id'] ?? $product['category_id'];
+$image = $p['product_image'] ?? $product['product_image'];
+$price = isset($p['product_price']) ? (float)$p['product_price'] : (float)$product['product_price'];
+$status = $p['status'] ?? $product['status'];
+
 
 $stmt = $conn->prepare("
     UPDATE products
@@ -109,22 +111,24 @@ if ($stmt->execute()) {
     $row = $sel->get_result()->fetch_assoc();
     $sel->close();
 
+    //edited
     echo json_encode([
         "success" => true,
         "message" => "Product updated successfully",
         "data" => [
             "product" => [
-                "_id" => (int)$row['product_id'],
-                "title" => $row['product_title'],
-                "description" => $row['product_description'],
-                "price" => (float)$row['product_price'],
-                "category" => $row['category_id'],
-                "image" => $row['product_image'],
+                "product_id" => (int)$row['product_id'],
+                "product_title" => $row['product_title'],
+                "product_description" => $row['product_description'],
+                "product_price" => (float)$row['product_price'],
+                "product_image" => $row['product_image'],
+                "category_id" => $row['category_id'],
                 "status" => $row['status'],
-                "seller_id" => (int)$row['seller_id'],
+                "seller_id" => (int)$row['seller_id']
             ]
         ]
     ]);
+
 
 } else {
     http_response_code(500);
