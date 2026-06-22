@@ -38,7 +38,7 @@ export const updateProduct = (id, product) => async (dispatch) => {
     const { data } = await api.updateProduct(id, product);
     dispatch({
       type: UPDATE_PRODUCT,
-      payload: data.data.product,
+      payload: data.product,
     });
   } catch (err) {
     console.error("updateProduct error:", err.message || err.response?.data);
